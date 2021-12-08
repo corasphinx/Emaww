@@ -3,9 +3,15 @@
     <h1>{{ msg }}</h1>
     <p>
       You can checkout this project source from github:
-      <a href="https://github.com/corasphinx/Emaww.git" target="_blank" rel="noopener">download source from git</a>.
+      <a
+        href="https://github.com/corasphinx/Emaww.git"
+        target="_blank"
+        rel="noopener"
+        >download source from git</a
+      >.
     </p>
-    <h3>Export xml to 
+    <h3>
+      Export xml to
       <a href="https://redis.io/" target="_blank" rel="noopener">Redis</a>.
     </h3>
     <ul>
@@ -15,18 +21,22 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
   // define methods under the `methods` object
   methods: {
     exportXML: function () {
-      
-    }
-  }
-}
+      axios.get("http://localhost:8080/config.xml").then((response) => {
+        var xmlText = response.data;
+        console.info(xmlText);
+      });
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -47,10 +57,9 @@ a {
 }
 button {
   background-color: #42b983;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 200px;
   height: 50px;
   border-width: 0px;
 }
-
 </style>
